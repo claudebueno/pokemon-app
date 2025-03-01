@@ -1,3 +1,27 @@
-// Composant liste des Pokémon
+<!-- Composant liste des Pokémon -->
 
-<p>pokemon-list works!</p>
+<!-- <p>pokemon-list works!</p> -->
+
+<div class="container">
+    <h2>Liste des Pokémon</h2>
+    
+    <div *ngIf="loading" class="loading">
+      Chargement des Pokémon...
+    </div>
+  
+    <div *ngIf="error" class="error">
+      {{ error }}
+    </div>
+  
+    <div class="pokemon-grid">
+      <div *ngFor="let pokemon of pokemons" class="pokemon-card">
+        <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
+        <h3>{{ pokemon.name | titlecase }}</h3>
+        <div class="types">
+          <span *ngFor="let type of pokemon.types" class="type">
+            {{ type.type.name }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
