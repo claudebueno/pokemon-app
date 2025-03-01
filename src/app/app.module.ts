@@ -3,18 +3,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { AppComponent } from './app.component';
+import { CommonModule } from '@angular/common';  // Importer CommonModule
 import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
 
 @NgModule({
-  declarations: [],  // Aucun composant déclaré car tous sont standalone
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppComponent,  // Import du composant standalone
-    PokemonListComponent  // Import du composant standalone
+    CommonModule,
+    PokemonListComponent  // Importer le composant
   ],
-  providers: [],
-  bootstrap: [AppComponent]  // AppComponent reste le composant de démarrage
+  providers: []
 })
-export class AppModule { } }
+export class AppModule { }
