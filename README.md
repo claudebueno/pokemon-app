@@ -1,59 +1,76 @@
-# PokemonApp
+# Pokédex Angular 19 - Application de démonstration
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+## 📱 Aperçu
 
-## Development server
+Une application web moderne développée avec Angular 19 qui permet d'explorer l'univers Pokémon via une interface intuitive et responsive. Cette application utilise l'API publique [PokéAPI](https://pokeapi.co/) pour afficher les informations sur les différents Pokémon.
 
-To start a local development server, run:
+![Aperçu de l'application Pokédex](https://placeholder-image.com/pokedex-preview.png)
 
-```bash
-ng serve
-```
+## ✨ Fonctionnalités
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Liste des Pokémon** : Affichage en grille des Pokémon avec leurs images et types
+- **Chargement optimisé** : Indicateurs de chargement et gestion des erreurs
+- **Design responsive** : S'adapte à tous les formats d'écran
+- **Architecture MVC** : Organisation claire du code suivant le modèle Modèle-Vue-Contrôleur
+- **Typage fort** : Utilisation des interfaces TypeScript pour une meilleure fiabilité
 
-## Code scaffolding
+## 🛠️ Technologies utilisées
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Angular 19** : Framework front-end avec les dernières fonctionnalités
+  - Support natif des signaux
+  - Compilateur Ivy optimisé
+  - Hydratation des composants
+- **TypeScript** : Pour un code plus robuste et maintenable
+- **RxJS** : Gestion des flux de données asynchrones
+- **CSS moderne** : Utilisation des Grid et Flexbox pour des mises en page avancées
+- **API REST** : Communication avec l'API externe PokéAPI
 
-```bash
-ng generate component component-name
-```
+## 🚀 Pour commencer
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1. Clonez le dépôt
+   ```bash
+   git clone https://github.com/username/pokemon-angular-app.git
+   cd pokemon-angular-app
+   ```
 
-```bash
-ng generate --help
-```
+2. Installez les dépendances
+   ```bash
+   npm install
+   ```
 
-## Building
+3. Lancez l'application en mode développement
+   ```bash
+   ng serve
+   ```
 
-To build the project run:
+4. Accédez à l'application sur `http://localhost:4200`
 
-```bash
-ng build
-```
+## 📚 Structure du projet
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+L'application suit une architecture MVC claire :
 
-## Running unit tests
+- **Modèles** : Interfaces TypeScript définissant la structure des données
+- **Services** : Gestion des appels API et de la logique métier
+- **Composants** : Éléments d'interface utilisateur avec leurs contrôleurs
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 🔍 Évolutions possibles
 
-```bash
-ng test
-```
+- Ajout d'une vue détaillée pour chaque Pokémon
+- Implémentation de la pagination pour naviguer entre les différentes pages
+- Fonction de recherche et de filtrage par type
+- Ajout de favoris et persistance des données utilisateur
+- Support du mode hors-ligne avec service workers
 
-## Running end-to-end tests
+## 📖 Ressources d'apprentissage
 
-For end-to-end (e2e) testing, run:
+- [Documentation officielle d'Angular](https://angular.io/docs)
+- [Tutoriel complet sur ce blog](#lien-vers-article)
+- [API Pokémon](https://pokeapi.co/docs/v2)
 
-```bash
-ng e2e
-```
+## 🤝 Contribution
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou soumettre une pull request.
 
-## Additional Resources
+## 📄 Licence
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
