@@ -4,8 +4,6 @@
 
 Une application web moderne développée avec Angular 19 qui permet d'explorer l'univers Pokémon via une interface intuitive et responsive. Cette application utilise l'API publique [PokéAPI](https://pokeapi.co/) pour afficher les informations sur les différents Pokémon.
 
-![Aperçu de l'application Pokédex](https://placeholder-image.com/pokedex-preview.png)
-
 ## ✨ Fonctionnalités
 
 - **Liste des Pokémon** : Affichage en grille des Pokémon avec leurs images et types
