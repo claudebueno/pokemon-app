@@ -14,7 +14,7 @@ Une application web moderne développée avec Angular 19 qui permet d'explorer l
 - **Architecture MVC** : Organisation claire du code suivant le modèle Modèle-Vue-Contrôleur
 - **Typage fort** : Utilisation des interfaces TypeScript pour une meilleure fiabilité
 
-## visuel
+## Visuel du Pokédex
 ![Capture écran Pokédex](https://raw.githubusercontent.com/claudebueno/pokemon-app/refs/heads/master/public/app-angular-pokedex-screen.png "Capture écran Pokédex")
 
 ## 🛠️ Technologies utilisées
