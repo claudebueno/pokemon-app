@@ -13,7 +13,7 @@ Une application web moderne développée avec Angular 19 qui permet d'explorer l
 - **Typage fort** : Utilisation des interfaces TypeScript pour une meilleure fiabilité
 
 ## Visuel du Pokédex
-![Capture écran Pokédex](https://raw.githubusercontent.com/claudebueno/pokemon-app/refs/heads/master/public/app-angular-pokedex-screen.png "Capture écran Pokédex")
+![Capture écran Pokédex](https://github.com/claudebueno/pokemon-app/blob/master/public/app-angular-pokedex-screen.png?raw=true "Capture écran Pokédex")
 
 ## 🛠️ Technologies utilisées
 
