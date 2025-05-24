@@ -1,5 +1,7 @@
 # Pokédex Angular 19 - Application de démonstration
 
+by Claude BUENO
+
 ## 📱 Aperçu
 
 Une application web moderne développée avec Angular 19 qui permet d'explorer l'univers Pokémon via une interface intuitive et responsive. Cette application utilise l'API publique [PokéAPI](https://pokeapi.co/) pour afficher les informations sur les différents Pokémon.
