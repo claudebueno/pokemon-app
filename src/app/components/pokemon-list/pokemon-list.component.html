@@ -1,7 +1,8 @@
 <div class="grid grid-cols-4 gap-4">
-  <div *ngFor="let pokemon of paginatedPokemons" class="bg-white p-4 rounded shadow">
-    <p class="text-center capitalize">{{ pokemon.name }}</p>
-  </div>
+<div *ngFor="let pokemon of paginatedPokemons" class="bg-white p-4 rounded shadow text-center">
+  <img [src]="getPokemonImageUrl(pokemon)" [alt]="pokemon.name" class="mx-auto h-24 mb-2" />
+  <p class="capitalize font-medium">{{ pokemon.name }}</p>
+</div>
 </div>
 
 <div class="flex justify-between mt-4">
@@ -13,11 +14,11 @@
   </button>
 </div>
 
-<div class="mt-4">
+<!-- <div class="mt-4">
   <h2 class="text-xl font-bold mb-2">Autres Pokémon :</h2>
   <div class="grid grid-cols-5 gap-2">
     <div *ngFor="let pokemon of navigationPokemons" class="bg-gray-100 p-2 rounded text-center capitalize">
       {{ pokemon.name }}
     </div>
   </div>
-</div>
+</div> -->

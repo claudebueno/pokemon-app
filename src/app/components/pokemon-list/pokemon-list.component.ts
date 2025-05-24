@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { PokemonService } from '../../services/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-list',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './pokemon-list.component.html'
 })
 export class PokemonListComponent implements OnInit {
@@ -40,5 +43,16 @@ export class PokemonListComponent implements OnInit {
     if (this.currentPage > 0) {
       this.currentPage--;
     }
+  }
+
+  // ✅ méthodes à ajouter ici
+  getPokemonId(pokemon: any): number {
+    const urlParts = pokemon.url.split('/');
+    return +urlParts[urlParts.length - 2];
+  }
+
+  getPokemonImageUrl(pokemon: any): string {
+    const id = this.getPokemonId(pokemon);
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
   }
 }
