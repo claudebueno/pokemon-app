@@ -1,27 +1,57 @@
-<!-- Composant liste des Pokémon -->
-
-<!-- <p>pokemon-list works!</p> -->
-
 <div class="container">
   <h2>Liste des Pokémon</h2>
-
-  <div *ngIf="loading" class="loading">
-    Chargement des Pokémon...
-  </div>
-
-  <div *ngIf="error" class="error">
-    {{ error }}
-  </div>
-
   <div class="pokemon-grid">
-    <div *ngFor="let pokemon of pokemons" class="pokemon-card">
-      <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
+    <div class="pokemon-card">
+      Nom
+      Image
+      <img [src]="getPokemonImageUrl(pokemon)" [alt]="pokemon.name" />
+      <p class="capitalize font-medium">{{ pokemon.name }}</p>
+
+      Types
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--
+<img [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
       <h3>{{ pokemon.name | titlecase }}</h3>
       <div class="types">
         <span *ngFor="let type of pokemon.types" class="type">
           {{ type.type.name }}
         </span>
-      </div>
-    </div>
+
+        -->
+
+<!--
+</div>
+
+
+<div class="grid grid-cols-4 gap-4">
+  <div *ngFor="let pokemon of paginatedPokemons" class="bg-white p-4 rounded shadow text-center">
+    <img [src]="getPokemonImageUrl(pokemon)" [alt]="pokemon.name" class="mx-auto h-24 mb-2"/>
+    <p class="capitalize font-medium">{{ pokemon.name }}</p>
   </div>
 </div>
+
+<div class="flex justify-between mt-4">
+  <button (click)="previous()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          [disabled]="currentPage === 0">
+    Précédent
+  </button>
+  <button (click)="next()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          [disabled]="(currentPage + 1) * pokemonsPerPage >= allPokemons.length">
+    Suivant
+  </button>
+</div>
+
+<div class="mt-4">
+  <h2 class="text-xl font-bold mb-2">Autres Pokémon :</h2>
+  <div class="grid grid-cols-5 gap-2">
+    <div *ngFor="let pokemon of navigationPokemons" class="bg-gray-100 p-2 rounded text-center capitalize">
+      {{ pokemon.name }}
+    </div>
+  </div>
+</div> -->
