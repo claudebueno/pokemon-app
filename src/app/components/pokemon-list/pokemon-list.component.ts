@@ -1,18 +1,5 @@
 // Composant liste des Pokémon
 
-/*
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-pokemon-list',
-  imports: [],
-  templateUrl: './pokemon-list.component.html',
-  styleUrl: './pokemon-list.component.css'
-})
-export class PokemonListComponent {
-
-}
-*/
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PokemonService } from '../../services/pokemon.service';
@@ -40,7 +27,7 @@ export class PokemonListComponent implements OnInit {
 
   loadPokemons(): void {
     this.loading = true;
-    this.pokemonService.getPokemonList(20, 0).subscribe({
+    this.pokemonService.getPokemonList(10, 0).subscribe({
       next: (response) => {
         response.results.forEach((pokemon: any) => {
           const id = this.extractPokemonId(pokemon.url);

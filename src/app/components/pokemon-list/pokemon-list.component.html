@@ -1,5 +1,5 @@
-<div class="container">
-  <h2>Liste des Pokémon</h2>
+<div class="container-fluid">
+<!--  <h4>Liste des Pokémon</h4>-->
 
   <div *ngIf="loading" class="loading">
     Chargement des Pokémon...
@@ -20,4 +20,18 @@
       </div>
     </div>
   </div>
+
+
+<!-- Navigation de pages -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link">Previous</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+
 </div>

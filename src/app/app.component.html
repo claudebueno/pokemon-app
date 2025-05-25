@@ -1,8 +1,14 @@
 <!-- Template du composant racine -->
 
 <div class="app-container">
-  <header>
-    <h1>Pokédex Angular</h1>
-  </header>
+  <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+      <h1 class="navbar-brand">Pokedex Angular</h1>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Attrapes</button>
+      </form>
+    </div>
+  </nav>
   <app-pokemon-list></app-pokemon-list>
 </div>
