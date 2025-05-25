@@ -27,7 +27,7 @@ export class PokemonListComponent implements OnInit {
 
   loadPokemons(): void {
     this.loading = true;
-    this.pokemonService.getPokemonList(10, 0).subscribe({
+    this.pokemonService.getPokemonList(16, 0).subscribe({
       next: (response) => {
         response.results.forEach((pokemon: any) => {
           const id = this.extractPokemonId(pokemon.url);
