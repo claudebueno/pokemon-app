@@ -1,9 +1,9 @@
 // Composant liste des Pokémon
 
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PokemonService } from '../../services/pokemon.service';
-import { Pokemon } from '../../models/pokemon.model';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {PokemonService} from '../../services/pokemon.service';
+import {Pokemon} from '../../models/pokemon.model';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -13,13 +13,13 @@ import { Pokemon } from '../../models/pokemon.model';
   styleUrls: ['./pokemon-list.component.css']
 })
 
-
 export class PokemonListComponent implements OnInit {
   pokemons: Pokemon[] = [];
   loading: boolean = true;
   error: string = '';
 
-  constructor(private pokemonService: PokemonService) { }
+  constructor(private pokemonService: PokemonService) {
+  }
 
   ngOnInit(): void {
     this.loadPokemons();

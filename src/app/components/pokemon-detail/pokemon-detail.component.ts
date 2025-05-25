@@ -9,5 +9,4 @@ import { Component } from '@angular/core';
   styleUrl: './pokemon-detail.component.css'
 })
 export class PokemonDetailComponent {
-
 }
