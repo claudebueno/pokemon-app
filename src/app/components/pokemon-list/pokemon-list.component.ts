@@ -1,44 +1,69 @@
-import { Component, OnInit } from '@angular/core';
-import { PokemonService } from '../../services/pokemon.service';
+// Composant liste des Pokémon
+
+/*
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-pokemon-list',
-  templateUrl: './pokemon-list.component.html'
+  imports: [],
+  templateUrl: './pokemon-list.component.html',
+  styleUrl: './pokemon-list.component.css'
 })
-export class PokemonListComponent implements OnInit {
-  allPokemons: any[] = [];
-  currentPage: number = 0;
-  pokemonsPerPage: number = 20;
-  navigationStep: number = 10;
+export class PokemonListComponent {
 
-  constructor(private pokemonService: PokemonService) {}
+}
+*/
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PokemonService } from '../../services/pokemon.service';
+import { Pokemon } from '../../models/pokemon.model';
+
+@Component({
+  selector: 'app-pokemon-list',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './pokemon-list.component.html',
+  styleUrls: ['./pokemon-list.component.css']
+})
+
+
+export class PokemonListComponent implements OnInit {
+  pokemons: Pokemon[] = [];
+  loading: boolean = true;
+  error: string = '';
+
+  constructor(private pokemonService: PokemonService) { }
 
   ngOnInit(): void {
-    this.pokemonService.getAllPokemons().subscribe(data => {
-      this.allPokemons = data.results;
+    this.loadPokemons();
+  }
+
+  loadPokemons(): void {
+    this.loading = true;
+    this.pokemonService.getPokemonList(20, 0).subscribe({
+      next: (response) => {
+        response.results.forEach((pokemon: any) => {
+          const id = this.extractPokemonId(pokemon.url);
+          this.pokemonService.getPokemonDetail(id).subscribe({
+            next: (detail: Pokemon) => {
+              this.pokemons.push(detail);
+            },
+            error: (error) => {
+              this.error = 'Erreur lors du chargement des détails';
+            }
+          });
+        });
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = 'Erreur lors du chargement des Pokémon';
+        this.loading = false;
+      }
     });
   }
 
-  get paginatedPokemons(): any[] {
-    const start = this.currentPage * this.pokemonsPerPage;
-    return this.allPokemons.slice(start, start + this.pokemonsPerPage);
-  }
-
-  get navigationPokemons(): any[] {
-    const start = (this.currentPage + 1) * this.pokemonsPerPage;
-    return this.allPokemons.slice(start, start + this.navigationStep);
-  }
-
-  next(): void {
-    const maxPage = Math.floor(this.allPokemons.length / this.pokemonsPerPage);
-    if (this.currentPage < maxPage) {
-      this.currentPage++;
-    }
-  }
-
-  previous(): void {
-    if (this.currentPage > 0) {
-      this.currentPage--;
-    }
+  private extractPokemonId(url: string): number {
+    const parts = url.split('/');
+    return parseInt(parts[parts.length - 2]);
   }
 }
