@@ -9,6 +9,28 @@
     {{ error }}
   </div>
 
+  <!-- Utiliser les grid Bootstrap -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let pokemon of pokemons">
+        <div class="card text-center h-100">
+          <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{ pokemon.name | titlecase }}</h5>
+            <div class="d-flex justify-content-center flex-wrap gap-2">
+            <span *ngFor="let type of pokemon.types" class="badge bg-primary text-capitalize">
+              {{ type.type.name }}
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ancienne version -->
+
   <div class="pokemon-grid">
     <div *ngFor="let pokemon of pokemons" class="pokemon-card">
       <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
@@ -20,6 +42,8 @@
       </div>
     </div>
   </div>
+
+
 <!-- Navigation de pages -->
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
