@@ -42,16 +42,28 @@
   <nav aria-label="Navigation des pages">
     <ul class="pagination justify-content-center">
       <li class="page-item" [class.disabled]="!canPreviousPage()">
-        <button class="page-link" (click)="previousPage()" [disabled]="!canPreviousPage()">
+<!--        <button class="page-link" (click)="previousPage()" [disabled]="!canPreviousPage()">
           Précédent
+        </button>-->
+      </li>
+      <li class="page-item" [class.disabled]="!canPreviousPage()">
+        <button class="page-link" (click)="previousPage()" [disabled]="!canPreviousPage()">
+          ← Précédent
         </button>
       </li>
-      <li class="page-item active">
-        <span class="page-link">Page {{ currentPage }}</span>
-      </li>
+
+      <!-- Boutons des 6 pages -->
+      @for (page of pages; track page) {
+        <li class="page-item" [class.active]="page === currentPage">
+          <button class="page-link" (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </li>
+      }
+
       <li class="page-item" [class.disabled]="!canNextPage()">
         <button class="page-link" (click)="nextPage()" [disabled]="!canNextPage()">
-          Suivant
+          Suivant →
         </button>
       </li>
     </ul>
