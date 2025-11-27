@@ -1,44 +1,25 @@
 <div class="container-fluid">
-  @if (loading) {
-    <div class="alert alert-info" role="status">
-      Chargement des Pokémon...
-    </div>
-  }
-
-  @if (error) {
-    <div class="alert alert-danger" role="alert">
-      {{ error }}
-    </div>
-  }
-
-  <!-- Grille Bootstrap des Pokémon -->
-  <div class="container">
-    <div class="row">
-      @for (pokemon of pokemons; track pokemon.id) {
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-          <div class="card text-center h-100">
-            <img
-              [src]="pokemon.sprites.other?.['official-artwork']?.front_default || pokemon.sprites.front_default"
-              [alt]="pokemon.name"
-              class="card-img-top"
-              loading="lazy">
-            <div class="card-body">
-              <h5 class="card-title">{{ pokemon.name | titlecase }}</h5>
-              <div class="d-flex justify-content-center flex-wrap gap-2">
-                @for (type of pokemon.types; track type.type.name) {
-                  <span class="badge bg-primary text-capitalize">
-                    {{ type.type.name }}
-                  </span>
-                }
-              </div>
-            </div>
-          </div>
+<!-- Utiliser le nouveau control flow d'Angular 21 -->
+@if (loading) {
+  <div class="loading">Chargement des Pokémon...</div>
+} @else if (error) {
+  <div class="error">{{ error }}</div>
+} @else {
+  <div class="pokemon-grid">
+    @for (pokemon of pokemons; track pokemon.id) {
+      <div class="pokemon-card">
+        <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
+        <h3>{{ pokemon.name | uppercase }}</h3>
+        <div class="types">
+          @for (type of pokemon.types; track type.type.name) {
+            <span class="type">{{ type.type.name }}</span>
+          }
         </div>
-      }
-    </div>
+      </div>
+    }
   </div>
 
-  <!-- Section de pagination avec numérotation cliquable -->
+  <!-- Section de pagination -->
   <div class="pagination-container">
     <button
       class="btn btn-sm btn-outline-primary"
@@ -48,14 +29,15 @@
     </button>
 
     <div class="page-numbers">
-      <button
-        *ngFor="let page of pages"
-        class="btn btn-sm"
-        [class.btn-primary]="page === currentPage"
-        [class.btn-outline-primary]="page !== currentPage"
-        (click)="goToPage(page)">
-        {{ page }}
-      </button>
+      @for (page of pages; track page) {
+        <button
+          class="btn btn-sm"
+          [class.btn-primary]="page === currentPage"
+          [class.btn-outline-primary]="page !== currentPage"
+          (click)="goToPage(page)">
+          {{ page }}
+        </button>
+      }
     </div>
 
     <button
@@ -66,5 +48,5 @@
     </button>
   </div>
 
-<!--  <p class="text-center page-info">Page {{ currentPage }} sur {{ totalPages }}</p>-->
-</div>
+  <p class="text-center page-info">Page {{ currentPage }} sur {{ totalPages }}</p>
+}
