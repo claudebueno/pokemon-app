@@ -1,1 +1,61 @@
-/* Styles du composant racine */
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #232936 100%);
+}
+
+header {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  box-shadow: var(--shadow-lg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header h1 {
+  text-align: center;
+  color: white;
+  margin: 0;
+  font-size: 2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+}
+
+main {
+  flex: 1;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+footer {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  text-align: center;
+  padding: var(--spacing-xl);
+  border-top: 1px solid var(--bg-tertiary);
+  margin-top: var(--spacing-2xl);
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  main {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+}

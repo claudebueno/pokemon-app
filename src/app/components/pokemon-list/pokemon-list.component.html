@@ -1,71 +1,72 @@
-<div class="container-fluid">
+<div class="pokemon-container">
+  <!-- Affichage du chargement -->
   @if (loading) {
-    <div class="alert alert-info" role="status">
-      Chargement des Pokémon...
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <span class="loading-text">Chargement des Pokémon...</span>
     </div>
   }
 
-  @if (error) {
-    <div class="alert alert-danger" role="alert">
-      {{ error }}
+  <!-- Affichage des erreurs -->
+  @if (error && !loading) {
+    <div class="error-container">
+      <div class="error-icon">⚠️</div>
+      <p>{{ error }}</p>
     </div>
   }
 
-  <!-- Grille Bootstrap des Pokémon -->
-  <div class="container">
-    <div class="row">
+  <!-- Grille des Pokémon -->
+  @if (!loading && pokemons.length > 0) {
+    <div class="pokemon-grid">
       @for (pokemon of pokemons; track pokemon.id) {
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-          <div class="card text-center h-100">
+        <div class="pokemon-card" (click)="selectPokemon(pokemon)">
+          <div class="pokemon-image">
             <img
-              [src]="pokemon.sprites.other?.['official-artwork']?.front_default || pokemon.sprites.front_default"
+              [src]="pokemon.sprites?.other?.['official-artwork']?.front_default || pokemon.sprites?.front_default"
               [alt]="pokemon.name"
-              class="card-img-top"
-              loading="lazy">
-            <div class="card-body">
-              <h5 class="card-title">{{ pokemon.name | titlecase }}</h5>
-              <div class="d-flex justify-content-center flex-wrap gap-2">
-                @for (type of pokemon.types; track type.type.name) {
-                  <span class="badge bg-primary text-capitalize">
-                    {{ type.type.name }}
-                  </span>
-                }
-              </div>
+              loading="lazy"
+            />
+          </div>
+          <div class="pokemon-info">
+            <h3 class="pokemon-name">{{ pokemon.name }}</h3>
+            <span class="pokemon-id">#{{ pokemon.id | number: '3.0-0' }}</span>
+            <div class="pokemon-types">
+              @for (type of pokemon.types; track type.type.name) {
+                <span class="type-badge">{{ type.type.name }}</span>
+              }
             </div>
           </div>
         </div>
       }
     </div>
-  </div>
+  }
 
-  <!-- Navigation de pages -->
-  <nav aria-label="Navigation des pages">
-    <ul class="pagination justify-content-center">
-      <li class="page-item" [class.disabled]="!canPreviousPage()">
-<!--        <button class="page-link" (click)="previousPage()" [disabled]="!canPreviousPage()">
-          Précédent
-        </button>-->
-      </li>
-      <li class="page-item" [class.disabled]="!canPreviousPage()">
-        <button class="page-link" (click)="previousPage()" [disabled]="!canPreviousPage()">
-          ← Précédent
-        </button>
-      </li>
+  <!-- Pagination -->
+  @if (pokemons.length > 0 && !loading) {
+    <div class="pagination-container">
+      <nav aria-label="Navigation des pages">
+        <ul class="pagination">
+          <li class="page-item">
+            <button class="page-link" (click)="previousPage()" [disabled]="!canPreviousPage()">
+              ← Précédent
+            </button>
+          </li>
 
-      <!-- Boutons des 6 pages -->
-      @for (page of pages; track page) {
-        <li class="page-item" [class.active]="page === currentPage">
-          <button class="page-link" (click)="goToPage(page)">
-            {{ page }}
-          </button>
-        </li>
-      }
+          @for (page of pages; track page) {
+            <li class="page-item" [class.active]="page === currentPage">
+              <button class="page-link" (click)="goToPage(page)">
+                {{ page }}
+              </button>
+            </li>
+          }
 
-      <li class="page-item" [class.disabled]="!canNextPage()">
-        <button class="page-link" (click)="nextPage()" [disabled]="!canNextPage()">
-          Suivant →
-        </button>
-      </li>
-    </ul>
-  </nav>
+          <li class="page-item">
+            <button class="page-link" (click)="nextPage()" [disabled]="!canNextPage()">
+              Suivant →
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  }
 </div>
