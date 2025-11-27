@@ -20,6 +20,8 @@ export class PokemonListComponent implements OnInit {
   error: string = '';
   currentPage: number = 1;
   private itemsPerPage: number = 16;
+  totalPages: number = 6;
+  pages: number[] = [1, 2, 3, 4, 5, 6]; // Afficher toujours les 6 pages
 
   constructor(private pokemonService: PokemonService) {}
 
@@ -28,32 +30,32 @@ export class PokemonListComponent implements OnInit {
   }
 
   loadPokemons(): void {
-  this.loading = true;
-  this.pokemons = [];
+    this.loading = true;
+    this.pokemons = [];
 
-  // Générer 16 IDs aléatoires entre 1 et 1025
-  const randomIds = this.generateRandomPokemonIds(16);
+    // Générer 16 IDs aléatoires entre 1 et 1025
+    const randomIds = this.generateRandomPokemonIds(16);
 
-  randomIds.forEach(id => {
-    this.pokemonService.getPokemonDetail(id).subscribe({
-      next: (detail: Pokemon) => {
-        this.pokemons.push(detail);
-      },
-      error: (error) => {
-        this.error = 'Erreur lors du chargement des détails';
-      }
+    randomIds.forEach(id => {
+      this.pokemonService.getPokemonDetail(id).subscribe({
+        next: (detail: Pokemon) => {
+          this.pokemons.push(detail);
+        },
+        error: (error) => {
+          this.error = 'Erreur lors du chargement des détails';
+        }
+      });
     });
-  });
 
-  this.loading = false;
-}
+    this.loading = false;
+  }
 
   canPreviousPage(): boolean {
     return this.currentPage > 1;
   }
 
   canNextPage(): boolean {
-    return this.pokemons.length === this.itemsPerPage;
+    return this.currentPage < this.totalPages;
   }
 
   previousPage(): void {
@@ -66,6 +68,13 @@ export class PokemonListComponent implements OnInit {
   nextPage(): void {
     if (this.canNextPage()) {
       this.currentPage++;
+      this.loadPokemons();
+    }
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
       this.loadPokemons();
     }
   }

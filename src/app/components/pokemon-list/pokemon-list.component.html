@@ -38,22 +38,33 @@
     </div>
   </div>
 
-  <!-- Navigation de pages -->
-  <nav aria-label="Navigation des pages">
-    <ul class="pagination justify-content-center">
-      <li class="page-item" [class.disabled]="!canPreviousPage()">
-        <button class="page-link" (click)="previousPage()" [disabled]="!canPreviousPage()">
-          Précédent
-        </button>
-      </li>
-      <li class="page-item active">
-        <span class="page-link">Page {{ currentPage }}</span>
-      </li>
-      <li class="page-item" [class.disabled]="!canNextPage()">
-        <button class="page-link" (click)="nextPage()" [disabled]="!canNextPage()">
-          Suivant
-        </button>
-      </li>
-    </ul>
-  </nav>
+  <!-- Section de pagination avec numérotation cliquable -->
+  <div class="pagination-container">
+    <button
+      class="btn btn-sm btn-outline-primary"
+      (click)="previousPage()"
+      [disabled]="!canPreviousPage()">
+      ← Précédent
+    </button>
+
+    <div class="page-numbers">
+      <button
+        *ngFor="let page of pages"
+        class="btn btn-sm"
+        [class.btn-primary]="page === currentPage"
+        [class.btn-outline-primary]="page !== currentPage"
+        (click)="goToPage(page)">
+        {{ page }}
+      </button>
+    </div>
+
+    <button
+      class="btn btn-sm btn-outline-primary"
+      (click)="nextPage()"
+      [disabled]="!canNextPage()">
+      Suivant →
+    </button>
+  </div>
+
+<!--  <p class="text-center page-info">Page {{ currentPage }} sur {{ totalPages }}</p>-->
 </div>
