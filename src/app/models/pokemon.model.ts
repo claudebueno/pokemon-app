@@ -4,13 +4,12 @@ export interface Pokemon {
   id: number;
   name: string;
   sprites: {
+    other: any;
     front_default: string;
   };
-  types: {
+  types: Array<{
     type: {
       name: string;
     };
-  }[];
-  height: number;
-  weight: number;
+  }>;
 }
