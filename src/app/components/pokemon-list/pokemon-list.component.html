@@ -1,52 +1,71 @@
 <div class="container-fluid">
-<!-- Utiliser le nouveau control flow d'Angular 21 -->
-@if (loading) {
-  <div class="loading">Chargement des Pokémon...</div>
-} @else if (error) {
-  <div class="error">{{ error }}</div>
-} @else {
-  <div class="pokemon-grid">
-    @for (pokemon of pokemons; track pokemon.id) {
-      <div class="pokemon-card">
-        <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
-        <h3>{{ pokemon.name | uppercase }}</h3>
-        <div class="types">
-          @for (type of pokemon.types; track type.type.name) {
-            <span class="type">{{ type.type.name }}</span>
-          }
+  @if (loading) {
+    <div class="alert alert-info" role="status">
+      Chargement des Pokémon...
+    </div>
+  }
+
+  @if (error) {
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  }
+
+  <!-- Grille Bootstrap des Pokémon -->
+  <div class="container">
+    <div class="row">
+      @for (pokemon of pokemons; track pokemon.id) {
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+          <div class="card text-center h-100">
+            <img
+              [src]="pokemon.sprites.other?.['official-artwork']?.front_default || pokemon.sprites.front_default"
+              [alt]="pokemon.name"
+              class="card-img-top"
+              loading="lazy">
+            <div class="card-body">
+              <h5 class="card-title">{{ pokemon.name | titlecase }}</h5>
+              <div class="d-flex justify-content-center flex-wrap gap-2">
+                @for (type of pokemon.types; track type.type.name) {
+                  <span class="badge bg-primary text-capitalize">
+                    {{ type.type.name }}
+                  </span>
+                }
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    }
-  </div>
-
-  <!-- Section de pagination -->
-  <div class="pagination-container">
-    <button
-      class="btn btn-sm btn-outline-primary"
-      (click)="previousPage()"
-      [disabled]="!canPreviousPage()">
-      ← Précédent
-    </button>
-
-    <div class="page-numbers">
-      @for (page of pages; track page) {
-        <button
-          class="btn btn-sm"
-          [class.btn-primary]="page === currentPage"
-          [class.btn-outline-primary]="page !== currentPage"
-          (click)="goToPage(page)">
-          {{ page }}
-        </button>
       }
     </div>
-
-    <button
-      class="btn btn-sm btn-outline-primary"
-      (click)="nextPage()"
-      [disabled]="!canNextPage()">
-      Suivant →
-    </button>
   </div>
 
-  <p class="text-center page-info">Page {{ currentPage }} sur {{ totalPages }}</p>
-}
+  <!-- Navigation de pages -->
+  <nav aria-label="Navigation des pages">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="!canPreviousPage()">
+<!--        <button class="page-link" (click)="previousPage()" [disabled]="!canPreviousPage()">
+          Précédent
+        </button>-->
+      </li>
+      <li class="page-item" [class.disabled]="!canPreviousPage()">
+        <button class="page-link" (click)="previousPage()" [disabled]="!canPreviousPage()">
+          ← Précédent
+        </button>
+      </li>
+
+      <!-- Boutons des 6 pages -->
+      @for (page of pages; track page) {
+        <li class="page-item" [class.active]="page === currentPage">
+          <button class="page-link" (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </li>
+      }
+
+      <li class="page-item" [class.disabled]="!canNextPage()">
+        <button class="page-link" (click)="nextPage()" [disabled]="!canNextPage()">
+          Suivant →
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>

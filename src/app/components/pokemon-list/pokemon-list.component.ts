@@ -21,7 +21,7 @@ export class PokemonListComponent implements OnInit {
   currentPage: number = 1;
   private itemsPerPage: number = 16;
   totalPages: number = 6;
-  pages: number[] = [1, 2, 3, 4, 5, 6]; // Afficher toujours les 6 pages
+  pages: number[] = [1, 2, 3, 4, 5, 6];
 
   constructor(private pokemonService: PokemonService) {}
 
